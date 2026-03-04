@@ -5,19 +5,23 @@ import type { Product } from "@/entites/Product/types";
 import "../style/product-list.css";
 
 type Props = {
+  onAdd: (product: Product) => void;
   products: Product[];
   categories: string[];
   selectedCategory: string;
   setSelectedCategory: (cat: string) => void;
   loading: boolean;
+  cart: Product[];
 };
 
 export const ProductsList = ({
+  onAdd,
   products,
   categories,
   selectedCategory,
   setSelectedCategory,
   loading,
+  cart,
 }: Props) => {
   if (loading) return <Preloader />;
 
@@ -31,7 +35,12 @@ export const ProductsList = ({
 
       <div className="products-grid">
         {products.map((product: Product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            cart={cart}
+            key={product.id}
+            product={product}
+            onAdd={onAdd}
+          />
         ))}
       </div>
     </>

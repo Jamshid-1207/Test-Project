@@ -1,10 +1,11 @@
 import { useMemo } from "react";
-import { Header } from "@/widgets";
-import { useSearch, useProducts } from "@/feature/index";
+import { ProductsList, Cart, Header } from "@/widgets/index";
+import { useCart, useSearch, useProducts } from "@/feature";
 import type { Product } from "@/entites/Product/types";
-import { ProductsList } from "@/widgets/product-list/ui/ProductList";
+import "@/index.css";
 
-export const ProductsPage = () => {
+export function ProductsPage() {
+  const { cart, addToCart, removeFromCart } = useCart();
   const {
     filteredProducts,
     loading,
@@ -14,24 +15,26 @@ export const ProductsPage = () => {
   } = useProducts();
 
   const { query, setQuery, filter } = useSearch<Product>("title");
-
   const visibleProducts = useMemo(
     () => filter(filteredProducts),
     [filter, filteredProducts],
   );
-  return (
-    <>
-      <div>
-        <Header query={query} setQuery={setQuery} />
 
-        <ProductsList
-          products={visibleProducts}
-          categories={categories}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          loading={loading}
-        />
-      </div>
-    </>
+  return (
+    <div>
+      <Cart items={cart} onDelete={removeFromCart} />
+
+      <Header query={query} setQuery={setQuery} />
+
+      <ProductsList
+        cart={cart}
+        onAdd={addToCart}
+        products={visibleProducts}
+        categories={categories}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+        loading={loading}
+      />
+    </div>
   );
-};
+}

@@ -1,0 +1,48 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* чуть темнее для контраста */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px); /* легкое размытие фона */
+  animation: fadeIn 0.2s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  background: #fff;
+  padding: 24px 32px;
+  border-radius: 12px;
+  min-width: 320px;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+  transform: scale(0.95);
+  animation: scaleUp 0.2s ease forwards;
+}
+
+@keyframes scaleUp {
+  to {
+    transform: scale(1);
+  }
+}
+
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  gap: 16px;
+}
