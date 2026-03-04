@@ -1,0 +1,7 @@
+.types {
+  display: flex;
+  justify-content: space-around;
+  width: 75%;
+  gap: 10px;
+  margin: 16px 0;
+}
